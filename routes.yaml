@@ -1,0 +1,17 @@
+http:
+  routers:
+    auth:
+      service: serviceAuth
+      rule: "Host(`127.0.0.1`) && Path(`/auth`)"
+    backoffice:
+      service:  serviceBackoffice
+      rule: "Host(`127.0.0.1`) && Path(`/back-office`)"
+  services:
+    serviceAuth:
+      loadBalancer:
+        servers:
+        - url:  'http://127.0.0.1:8001'
+    serviceBackoffice:
+      loadBalancer:
+        servers:
+        - url:  'http://127.0.0.1:8002'
