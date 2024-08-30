@@ -2,10 +2,16 @@ http:
   routers:
     auth:
       service: serviceAuth
-      rule: "Host(`127.0.0.1`) && PathPrefix(`/auth`)"
+      rule: "Host(`127.0.0.1`) && PathPrefix(`/api/auth`)"
     backoffice:
       service:  serviceBackoffice
-      rule: "Host(`127.0.0.1`) && PathPrefix(`/back-office`)"
+      rule: "Host(`127.0.0.1`) && PathPrefix(`/api/back-office`)"
+    payment:
+      service: servicePayment
+      rule: "Host(`127.0.0.1`) && PathPrefix(`/api/payment`)"
+    notification:
+      service:  serviceNotification
+      rule: "Host(`127.0.0.1`) && PathPrefix(`/api/noti`)"
   services:
     serviceAuth:
       loadBalancer:
@@ -15,3 +21,11 @@ http:
       loadBalancer:
         servers:
         - url:  'http://127.0.0.1:8002'
+    servicePayment:
+      loadBalancer:
+        servers:
+        - url:  'http://127.0.0.1:8003'
+    serviceNotification:
+      loadBalancer:
+        servers:
+        - url:  'http://127.0.0.1:8004'
